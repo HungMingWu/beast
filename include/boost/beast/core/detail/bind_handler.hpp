@@ -18,7 +18,6 @@
 #include <boost/asio/handler_continuation_hook.hpp>
 #include <boost/asio/handler_invoke_hook.hpp>
 #include <boost/core/ignore_unused.hpp>
-#include <boost/mp11/integer_sequence.hpp>
 #include <boost/is_placeholder.hpp>
 #include <functional>
 #include <type_traits>
@@ -99,7 +98,7 @@ class bind_wrapper
         Handler& h,
         ArgsTuple& args,
         tuple<>&&,
-        mp11::index_sequence<S...>)
+        std::index_sequence<S...>)
     {
         boost::ignore_unused(args);
         h(detail::get<S>(std::move(args))...);
@@ -115,7 +114,7 @@ class bind_wrapper
         Handler& h,
         ArgsTuple& args,
         ValsTuple&& vals,
-        mp11::index_sequence<S...>)
+        std::index_sequence<S...>)
     {
         boost::ignore_unused(args);
         boost::ignore_unused(vals);
@@ -148,7 +147,7 @@ public:
         invoke(h_, args_,
             tuple<Values&&...>(
                 std::forward<Values>(values)...),
-            mp11::index_sequence_for<Args...>());
+            std::index_sequence_for<Args...>());
     }
 
     //
@@ -218,7 +217,7 @@ class bind_front_wrapper
     void
     invoke(
         std::false_type,
-        mp11::index_sequence<I...>,
+        std::index_sequence<I...>,
         Ts&&... ts)
     {
         h_( detail::get<I>(std::move(args_))...,
@@ -229,7 +228,7 @@ class bind_front_wrapper
     void
     invoke(
         std::true_type,
-        mp11::index_sequence<I...>,
+        std::index_sequence<I...>,
         Ts&&... ts)
     {
         std::mem_fn(h_)(
@@ -257,7 +256,7 @@ public:
     {
         invoke(
             std::is_member_function_pointer<Handler>{},
-            mp11::index_sequence_for<Args...>{},
+            std::index_sequence_for<Args...>{},
             std::forward<Ts>(ts)...);
     }
 
