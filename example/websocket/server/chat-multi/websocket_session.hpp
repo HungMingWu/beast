@@ -24,12 +24,12 @@ class shared_state;
 
 /** Represents an active WebSocket connection to the server
 */
-class websocket_session : public boost::enable_shared_from_this<websocket_session>
+class websocket_session : public std::enable_shared_from_this<websocket_session>
 {
     beast::flat_buffer buffer_;
     websocket::stream<beast::tcp_stream> ws_;
-    boost::shared_ptr<shared_state> state_;
-    std::vector<boost::shared_ptr<std::string const>> queue_;
+    std::shared_ptr<shared_state> state_;
+    std::vector<std::shared_ptr<std::string const>> queue_;
 
     void fail(beast::error_code ec, char const* what);
     void on_accept(beast::error_code ec);
@@ -39,7 +39,7 @@ class websocket_session : public boost::enable_shared_from_this<websocket_sessio
 public:
     websocket_session(
         tcp::socket&& socket,
-        boost::shared_ptr<shared_state> const& state);
+        std::shared_ptr<shared_state> const& state);
 
     ~websocket_session();
 
@@ -49,11 +49,11 @@ public:
 
     // Send a message
     void
-    send(boost::shared_ptr<std::string const> const& ss);
+    send(std::shared_ptr<std::string const> const& ss);
 
 private:
     void
-    on_send(boost::shared_ptr<std::string const> const& ss);
+    on_send(std::shared_ptr<std::string const> const& ss);
 };
 
 template<class Body, class Allocator>

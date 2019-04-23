@@ -23,8 +23,6 @@
 #include <boost/asio/is_executor.hpp>
 #include <boost/core/empty_value.hpp>
 #include <boost/config/workaround.hpp>
-#include <boost/enable_shared_from_this.hpp>
-#include <boost/shared_ptr.hpp>
 #include <chrono>
 #include <limits>
 #include <memory>
@@ -228,7 +226,7 @@ private:
         "Executor type requirements not met");
 
     struct impl_type
-        : boost::enable_shared_from_this<impl_type>
+        : std::enable_shared_from_this<impl_type>
         , boost::empty_value<RatePolicy>
     {
         // must come first
@@ -282,7 +280,7 @@ private:
     // outlive the destruction of the stream_socket object,
     // in the case where there is no outstanding read or write
     // but the implementation is still waiting on a timer.
-    boost::shared_ptr<impl_type> impl_;
+    std::shared_ptr<impl_type> impl_;
 
     struct timeout_handler;
 

@@ -29,7 +29,6 @@
 #include <boost/asio/bind_executor.hpp>
 #include <boost/asio/steady_timer.hpp>
 #include <boost/assert.hpp>
-#include <boost/make_shared.hpp>
 #include <boost/throw_exception.hpp>
 #include <algorithm>
 #include <chrono>
@@ -53,7 +52,7 @@ template<class NextLayer, bool deflateSupported>
 template<class... Args>
 stream<NextLayer, deflateSupported>::
 stream(Args&&... args)
-    : impl_(boost::make_shared<impl_type>(
+    : impl_(std::make_shared<impl_type>(
         std::forward<Args>(args)...))
 {
     BOOST_ASSERT(impl_->rd_buf.max_size() >=

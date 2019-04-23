@@ -205,7 +205,7 @@ struct http_session::send_lambda
         // The lifetime of the message has to extend
         // for the duration of the async operation so
         // we use a shared_ptr to manage it.
-        auto sp = boost::make_shared<
+        auto sp = std::make_shared<
             http::message<isRequest, Body, Fields>>(std::move(msg));
 
         // Write the response
@@ -225,7 +225,7 @@ struct http_session::send_lambda
 http_session::
 http_session(
     tcp::socket&& socket,
-    boost::shared_ptr<shared_state> const& state)
+    std::shared_ptr<shared_state> const& state)
     : stream_(std::move(socket))
     , state_(state)
 {
@@ -294,7 +294,7 @@ on_read(beast::error_code ec, std::size_t)
     {
         // Create a websocket session, transferring ownership
         // of both the socket and the HTTP request.
-        boost::make_shared<websocket_session>(
+        std::make_shared<websocket_session>(
             stream_.release_socket(),
                 state_)->run(parser_->release());
         return;
@@ -315,7 +315,7 @@ on_read(beast::error_code ec, std::size_t)
             // for the duration of the async operation so
             // we use a shared_ptr to manage it.
             using response_type = typename std::decay<decltype(response)>::type;
-            auto sp = boost::make_shared<response_type>(std::forward<decltype(response)>(response));
+            auto sp = std::make_shared<response_type>(std::forward<decltype(response)>(response));
 
         #if 0
             // NOTE This causes an ICE in gcc 7.3

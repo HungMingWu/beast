@@ -27,7 +27,6 @@
 #include <boost/beast/http/detail/type_traits.hpp>
 #include <boost/asio/async_result.hpp>
 #include <boost/asio/error.hpp>
-#include <boost/shared_ptr.hpp>
 #include <algorithm>
 #include <cstdint>
 #include <functional>
@@ -132,7 +131,7 @@ class stream
 {
     struct impl_type;
 
-    boost::shared_ptr<impl_type> impl_;
+    std::shared_ptr<impl_type> impl_;
 
     using time_point = typename
         std::chrono::steady_clock::time_point;

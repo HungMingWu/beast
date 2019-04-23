@@ -18,7 +18,6 @@
 #include <boost/asio/bind_executor.hpp>
 #include <boost/asio/coroutine.hpp>
 #include <boost/assert.hpp>
-#include <boost/make_shared.hpp>
 #include <boost/core/exchange.hpp>
 #include <cstdlib>
 #include <type_traits>
@@ -80,7 +79,7 @@ on_timer(Executor2 const& ex2)
 
     struct handler : boost::empty_value<Executor2>
     {
-        boost::weak_ptr<impl_type> wp;
+        std::weak_ptr<impl_type> wp;
 
         using executor_type = Executor2;
 
@@ -92,7 +91,7 @@ on_timer(Executor2 const& ex2)
 
         handler(
             Executor2 const& ex2,
-            boost::shared_ptr<impl_type> const& sp)
+            std::shared_ptr<impl_type> const& sp)
             : boost::empty_value<Executor2>(
                 boost::empty_init_t{}, ex2)
             , wp(sp)
@@ -165,7 +164,7 @@ struct basic_stream<Protocol, Executor, RatePolicy>::
     timeout_handler
 {
     op_state& state;
-    boost::weak_ptr<impl_type> wp;
+    std::weak_ptr<impl_type> wp;
     tick_type tick;
 
     void
@@ -205,7 +204,7 @@ class transfer_op
     : public async_base<Handler, Executor>
     , public boost::asio::coroutine
 {
-    boost::shared_ptr<impl_type> impl_;
+    std::shared_ptr<impl_type> impl_;
     pending_guard pg_;
     Buffers b_;
 
@@ -406,7 +405,7 @@ template<class Handler>
 class connect_op
     : public async_base<Handler, Executor>
 {
-    boost::shared_ptr<impl_type> impl_;
+    std::shared_ptr<impl_type> impl_;
     pending_guard pg0_;
     pending_guard pg1_;
 
@@ -679,7 +678,7 @@ template<class Protocol, class Executor, class RatePolicy>
 template<class Arg0, class... Args, class>
 basic_stream<Protocol, Executor, RatePolicy>::
 basic_stream(Arg0&& arg0, Args&&... args)
-    : impl_(boost::make_shared<impl_type>(
+    : impl_(std::make_shared<impl_type>(
         std::false_type{},
         std::forward<Arg0>(arg0),
         std::forward<Args>(args)...))
@@ -691,7 +690,7 @@ template<class RatePolicy_, class Arg0, class... Args, class>
 basic_stream<Protocol, Executor, RatePolicy>::
 basic_stream(
     RatePolicy_&& policy, Arg0&& arg0, Args&&... args)
-    : impl_(boost::make_shared<impl_type>(
+    : impl_(std::make_shared<impl_type>(
         std::true_type{},
         std::forward<RatePolicy_>(policy),
         std::forward<Arg0>(arg0),
@@ -702,7 +701,7 @@ basic_stream(
 template<class Protocol, class Executor, class RatePolicy>
 basic_stream<Protocol, Executor, RatePolicy>::
 basic_stream(basic_stream&& other)
-    : impl_(boost::make_shared<impl_type>(
+    : impl_(std::make_shared<impl_type>(
         std::move(*other.impl_)))
 {
     // VFALCO I'm not sure this implementation is correct...
