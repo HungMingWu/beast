@@ -10,8 +10,6 @@
 #ifndef BOOST_BEAST_CORE_IMPL_ASYNC_BASE_HPP
 #define BOOST_BEAST_CORE_IMPL_ASYNC_BASE_HPP
 
-#include <boost/core/exchange.hpp>
-
 namespace boost {
 namespace beast {
 
@@ -147,7 +145,7 @@ allocate_stable(
         d.alloc, std::forward<Args>(args)...);
     d.ptr->next_ = base.list_;
     base.list_ = d.ptr;
-    return boost::exchange(d.ptr, nullptr)->value;
+    return std::exchange(d.ptr, nullptr)->value;
 }
 
 } // beast

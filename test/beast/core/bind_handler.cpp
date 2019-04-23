@@ -23,7 +23,6 @@
 #include <boost/asio/post.hpp>
 #include <boost/asio/strand.hpp>
 #include <boost/bind/placeholders.hpp>
-#include <boost/core/exchange.hpp>
 #include <memory>
 #include <string>
 
@@ -154,7 +153,7 @@ public:
         test_cb() = default;
         test_cb(test_cb const&) = delete;
         test_cb(test_cb&& other)
-            : fail_(boost::exchange(
+            : fail_(std::exchange(
                 other.fail_, false))
         {
         }

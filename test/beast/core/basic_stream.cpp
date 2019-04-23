@@ -463,7 +463,7 @@ public:
 
         handler(handler&& other)
             : ec_(other.ec_)
-            , n_(boost::exchange(other.n_,
+            , n_(std::exchange(other.n_,
                 (std::numeric_limits<std::size_t>::max)()))
         {
         }
@@ -758,7 +758,7 @@ public:
             }
 
             connect_handler(connect_handler&& other)
-                : pass_(boost::exchange(other.pass_, true))
+                : pass_(std::exchange(other.pass_, true))
                 , expected_(other.expected_)
             {
             }
@@ -779,7 +779,7 @@ public:
             range_handler() = default;
 
             range_handler(range_handler&& other)
-                : pass(boost::exchange(other.pass, true))
+                : pass(std::exchange(other.pass, true))
             {
             }
 
@@ -802,7 +802,7 @@ public:
             iterator_handler() = default;
 
             iterator_handler(iterator_handler&& other)
-                : pass(boost::exchange(other.pass, true))
+                : pass(std::exchange(other.pass, true))
             {
             }
 
@@ -1125,7 +1125,7 @@ public:
             }
 
             handler(handler&& other)
-                : pass_(boost::exchange(other.pass_, true))
+                : pass_(std::exchange(other.pass_, true))
                 , expected_(other.expected_)
             {
             }

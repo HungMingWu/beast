@@ -14,7 +14,6 @@
 
 #if BOOST_BEAST_USE_POSIX_FILE
 
-#include <boost/core/exchange.hpp>
 #include <limits>
 #include <fcntl.h>
 #include <sys/types.h>
@@ -78,7 +77,7 @@ file_posix::
 
 file_posix::
 file_posix(file_posix&& other)
-    : fd_(boost::exchange(other.fd_, -1))
+    : fd_(std::exchange(other.fd_, -1))
 {
 }
 

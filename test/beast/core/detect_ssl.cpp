@@ -15,7 +15,6 @@
 #include <boost/beast/_experimental/test/handler.hpp>
 #include <boost/beast/core/flat_buffer.hpp>
 #include <boost/beast/core/string.hpp>
-#include <boost/core/exchange.hpp>
 namespace boost {
 namespace beast {
 

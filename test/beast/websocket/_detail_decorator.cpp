@@ -32,7 +32,7 @@ public:
         }
 
         req_t(req_t&& other) noexcept
-            : pass_(boost::exchange(other.pass_, true))
+            : pass_(std::exchange(other.pass_, true))
         {
         }
 
@@ -56,7 +56,7 @@ public:
         }
 
         res_t(res_t&& other) noexcept
-            : pass_(boost::exchange(other.pass_, true))
+            : pass_(std::exchange(other.pass_, true))
         {
         }
 

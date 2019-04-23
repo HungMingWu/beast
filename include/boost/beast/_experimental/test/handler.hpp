@@ -13,7 +13,6 @@
 #include <boost/beast/_experimental/unit_test/suite.hpp>
 #include <boost/beast/core/error.hpp>
 #include <boost/asio/io_context.hpp>
-#include <boost/core/exchange.hpp>
 #include <boost/optional.hpp>
 
 namespace boost {
@@ -52,7 +51,7 @@ public:
 
     handler(handler&& other)
         : ec_(other.ec_)
-        , pass_(boost::exchange(other.pass_, true))
+        , pass_(std::exchange(other.pass_, true))
     {
     }
 

@@ -22,7 +22,6 @@
 #include <boost/asio/handler_continuation_hook.hpp>
 #include <boost/asio/handler_invoke_hook.hpp>
 #include <boost/asio/post.hpp>
-#include <boost/core/exchange.hpp>
 #include <boost/core/empty_value.hpp>
 #include <utility>
 
@@ -643,7 +642,7 @@ public:
     stable_async_base(stable_async_base&& other)
         : async_base<Handler, Executor1, Allocator>(
             std::move(other))
-        , list_(boost::exchange(other.list_, nullptr))
+        , list_(std::exchange(other.list_, nullptr))
     {
     }
 

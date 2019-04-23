@@ -18,7 +18,6 @@
 #include <boost/asio/bind_executor.hpp>
 #include <boost/asio/coroutine.hpp>
 #include <boost/assert.hpp>
-#include <boost/core/exchange.hpp>
 #include <cstdlib>
 #include <type_traits>
 #include <utility>

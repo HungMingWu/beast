@@ -38,7 +38,7 @@ public:
         }
 
         handler(handler&& other)
-            : failed_(boost::exchange(
+            : failed_(std::exchange(
                 other.failed_, false))
         {
             if(throw_on_move_)
@@ -68,7 +68,7 @@ public:
         }
 
         unhandler(unhandler&& other)
-            : invoked_(boost::exchange(
+            : invoked_(std::exchange(
                 other.invoked_, false))
         {
         }

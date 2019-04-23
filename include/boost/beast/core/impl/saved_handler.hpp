@@ -16,7 +16,6 @@
 #include <boost/asio/executor_work_guard.hpp>
 #include <boost/assert.hpp>
 #include <boost/core/empty_value.hpp>
-#include <boost/core/exchange.hpp>
 #include <utility>
 
 namespace boost {
@@ -130,7 +129,7 @@ emplace(Handler&& handler, Allocator const& alloc)
     storage s(alloc);
     alloc_traits::construct(s.a, s.p,
         s.a, std::forward<Handler>(handler));
-    p_ = boost::exchange(s.p, nullptr);
+    p_ = std::exchange(s.p, nullptr);
 }
 
 template<class Handler>

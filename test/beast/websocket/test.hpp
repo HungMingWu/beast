@@ -1249,7 +1249,7 @@ class test_async_api
 
         handler(handler&& other)
             : ec_(other.ec_)
-            , pass_(boost::exchange(other.pass_, true))
+            , pass_(std::exchange(other.pass_, true))
         {
         }
 

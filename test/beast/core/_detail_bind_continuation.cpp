@@ -22,7 +22,6 @@
 #include <boost/asio/dispatch.hpp>
 #include <boost/asio/post.hpp>
 #include <boost/asio/defer.hpp>
-#include <boost/core/exchange.hpp>
 
 namespace boost {
 namespace beast {
@@ -45,7 +44,7 @@ public:
         }
 
         handler(handler&& other)
-            : pass_(boost::exchange(other.pass_, true))
+            : pass_(std::exchange(other.pass_, true))
         {
         }
 
