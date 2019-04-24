@@ -101,7 +101,7 @@ public:
 
     void
     on_body_init_impl(
-        boost::optional<std::uint64_t> const& content_length_,
+        std::optional<std::uint64_t> const& content_length_,
         error_code& ec)
     {
         ++got_on_body;

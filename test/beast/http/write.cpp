@@ -63,7 +63,7 @@ public:
                 ec = {};
             }
 
-            boost::optional<std::pair<const_buffers_type, bool>>
+            std::optional<std::pair<const_buffers_type, bool>>
             get(error_code& ec)
             {
                 ec = {};
@@ -108,7 +108,7 @@ public:
                 ec = {};
             }
 
-            boost::optional<std::pair<const_buffers_type, bool>>
+            std::optional<std::pair<const_buffers_type, bool>>
             get(error_code& ec)
             {
                 ec = {};
@@ -119,24 +119,24 @@ public:
             }
 
         private:
-            boost::optional<std::pair<const_buffers_type, bool>>
+            std::optional<std::pair<const_buffers_type, bool>>
             get(
                 std::false_type,    // isSplit
                 std::false_type)    // isFinalEmpty
             {
                 if(body_.s.empty())
-                    return boost::none;
+                    return std::nullopt;
                 return {{net::buffer(
                     body_.s.data(), body_.s.size()), false}};
             }
 
-            boost::optional<std::pair<const_buffers_type, bool>>
+            std::optional<std::pair<const_buffers_type, bool>>
             get(
                 std::false_type,    // isSplit
                 std::true_type)     // isFinalEmpty
             {
                 if(body_.s.empty())
-                    return boost::none;
+                    return std::nullopt;
                 switch(step_)
                 {
                 case 0:
@@ -144,11 +144,11 @@ public:
                     return {{net::buffer(
                         body_.s.data(), body_.s.size()), true}};
                 default:
-                    return boost::none;
+                    return std::nullopt;
                 }
             }
 
-            boost::optional<std::pair<const_buffers_type, bool>>
+            std::optional<std::pair<const_buffers_type, bool>>
             get(
                 std::true_type,     // isSplit
                 std::false_type)    // isFinalEmpty
@@ -158,7 +158,7 @@ public:
                 {
                 case 0:
                     if(n == 0)
-                        return boost::none;
+                        return std::nullopt;
                     step_ = 1;
                     return {{net::buffer(body_.s.data(), n),
                         body_.s.size() > 1}};
@@ -168,7 +168,7 @@ public:
                 }
             }
 
-            boost::optional<std::pair<const_buffers_type, bool>>
+            std::optional<std::pair<const_buffers_type, bool>>
             get(
                 std::true_type,     // isSplit
                 std::true_type)     // isFinalEmpty
@@ -178,7 +178,7 @@ public:
                 {
                 case 0:
                     if(n == 0)
-                        return boost::none;
+                        return std::nullopt;
                     step_ = body_.s.size() > 1 ? 1 : 2;
                     return {{net::buffer(body_.s.data(), n), true}};
                 case 1:
@@ -187,7 +187,7 @@ public:
                     return {{net::buffer(body_.s.data() + n,
                         body_.s.size() - n), true}};
                 default:
-                    return boost::none;
+                    return std::nullopt;
                 }
             }
         };
@@ -241,13 +241,13 @@ public:
                 body_.fc_.fail(ec);
             }
 
-            boost::optional<std::pair<const_buffers_type, bool>>
+            std::optional<std::pair<const_buffers_type, bool>>
             get(error_code& ec)
             {
                 if(body_.fc_.fail(ec))
-                    return boost::none;
+                    return std::nullopt;
                 if(n_ >= body_.s_.size())
-                    return boost::none;
+                    return std::nullopt;
                 return {{const_buffers_type{
                     body_.s_.data() + n_++, 1}, true}};
             }
@@ -916,7 +916,7 @@ public:
                 ec = {};
             }
 
-            boost::optional<std::pair<const_buffers_type, bool>>
+            std::optional<std::pair<const_buffers_type, bool>>
             get(error_code& ec)
             {
                 ec = {};
@@ -947,7 +947,7 @@ public:
                 ec = {};
             }
 
-            boost::optional<std::pair<const_buffers_type, bool>>
+            std::optional<std::pair<const_buffers_type, bool>>
             get(error_code& ec)
             {
                 ec = {};

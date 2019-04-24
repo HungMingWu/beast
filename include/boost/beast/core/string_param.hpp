@@ -15,7 +15,7 @@
 #include <boost/beast/core/static_string.hpp>
 #include <boost/beast/core/detail/static_ostream.hpp>
 #include <boost/beast/core/detail/type_traits.hpp>
-#include <boost/optional.hpp>
+#include <optional>
 
 namespace boost {
 namespace beast {
@@ -43,7 +43,7 @@ class string_param
 {
     string_view sv_;
     char buf_[128];
-    boost::optional<detail::static_ostream> os_;
+    std::optional<detail::static_ostream> os_;
 
     template<class T>
     typename std::enable_if<

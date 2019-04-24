@@ -13,7 +13,7 @@
 #include "net.hpp"
 #include "beast.hpp"
 #include "shared_state.hpp"
-#include <boost/optional.hpp>
+#include <optional>
 #include <cstdlib>
 #include <memory>
 
@@ -27,7 +27,7 @@ class http_session : public std::enable_shared_from_this<http_session>
 
     // The parser is stored in an optional container so we can
     // construct it from scratch it at the beginning of each new message.
-    boost::optional<http::request_parser<http::string_body>> parser_;
+    std::optional<http::request_parser<http::string_body>> parser_;
 
     struct send_lambda;
 

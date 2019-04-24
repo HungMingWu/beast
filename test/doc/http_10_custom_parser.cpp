@@ -120,7 +120,7 @@ private:
     */
     void
     on_body_init_impl(
-        boost::optional<
+        std::optional<
             std::uint64_t> const&
                 content_length,     // Content length if known, else `boost::none`
         error_code& ec) override;   // The error returned to the caller, if any
@@ -257,7 +257,7 @@ on_header_impl(error_code& ec)
 template<bool isRequest>
 void custom_parser<isRequest>::
 on_body_init_impl(
-    boost::optional<std::uint64_t> const& content_length,
+    std::optional<std::uint64_t> const& content_length,
     error_code& ec)
 {
     boost::ignore_unused(content_length);

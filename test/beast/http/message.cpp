@@ -208,7 +208,7 @@ public:
         void set_target_impl(string_view s) { target = std::string(s); }
         void set_reason_impl(string_view) {}
         void set_chunked_impl(bool) {}
-        void set_content_length_impl(boost::optional<std::uint64_t>) {}
+        void set_content_length_impl(std::optional<std::uint64_t>) {}
         void set_keep_alive_impl(unsigned, bool) {}
     };
 

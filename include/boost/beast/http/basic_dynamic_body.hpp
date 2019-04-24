@@ -15,7 +15,7 @@
 #include <boost/beast/core/detail/buffer.hpp>
 #include <boost/beast/http/error.hpp>
 #include <boost/beast/http/message.hpp>
-#include <boost/optional.hpp>
+#include <optional>
 #include <algorithm>
 #include <cstdint>
 #include <utility>
@@ -77,7 +77,7 @@ struct basic_dynamic_body
         }
 
         void
-        init(boost::optional<
+        init(std::optional<
             std::uint64_t> const&, error_code& ec)
         {
             ec = {};
@@ -143,7 +143,7 @@ struct basic_dynamic_body
             ec = {};
         }
 
-        boost::optional<std::pair<const_buffers_type, bool>>
+        std::optional<std::pair<const_buffers_type, bool>>
         get(error_code& ec)
         {
             ec = {};

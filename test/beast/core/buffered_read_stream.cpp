@@ -20,7 +20,7 @@
 #include <boost/asio/read.hpp>
 #include <boost/asio/spawn.hpp>
 #include <boost/asio/strand.hpp>
-#include <boost/optional.hpp>
+#include <optional>
 
 namespace boost {
 namespace beast {
@@ -57,9 +57,9 @@ public:
         std::size_t cap_;
         unit_test::suite& suite_;
         net::io_context& ioc_;
-        boost::optional<test::stream> ts_;
-        boost::optional<test::fail_count> fc_;
-        boost::optional<buffered_read_stream<
+        std::optional<test::stream> ts_;
+        std::optional<test::fail_count> fc_;
+        std::optional<buffered_read_stream<
             test::stream&, multi_buffer>> brs_;
 
         loop(

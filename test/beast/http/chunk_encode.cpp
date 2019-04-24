@@ -17,7 +17,7 @@
 #include <boost/beast/http/fields.hpp>
 #include <boost/beast/test/fuzz.hpp>
 #include <boost/beast/_experimental/unit_test/suite.hpp>
-#include <boost/optional.hpp>
+#include <optional>
 #include <random>
 
 namespace boost {

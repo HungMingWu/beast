@@ -13,7 +13,7 @@
 #include <boost/beast/_experimental/unit_test/suite.hpp>
 #include <boost/beast/core/error.hpp>
 #include <boost/asio/io_context.hpp>
-#include <boost/optional.hpp>
+#include <optional>
 
 namespace boost {
 namespace beast {
@@ -32,7 +32,7 @@ namespace test {
 */
 class handler
 {
-    boost::optional<error_code> ec_;
+    std::optional<error_code> ec_;
     bool pass_ = false;
 
 public:
@@ -45,7 +45,7 @@ public:
     }
 
     explicit
-    handler(boost::none_t)
+    handler(std::nullopt_t)
     {
     }
 
@@ -118,7 +118,7 @@ inline
 handler
 any_handler() noexcept
 {
-    return handler(boost::none);
+    return handler(std::nullopt);
 }
 
 /** Return a test CompletionHandler which requires a specific error code.

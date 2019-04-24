@@ -151,7 +151,7 @@ public:
         chunk_crlf>;
 
     basic_fields const& f_;
-    boost::optional<view_type> view_;
+    std::optional<view_type> view_;
     char buf_[13];
 
 public:
@@ -442,7 +442,7 @@ operator=(basic_fields&& other) noexcept(
     alloc_traits::propagate_on_container_move_assignment::value)
       -> basic_fields&
 {
-    static_assert(is_nothrow_move_assignable<Allocator>::value,
+    static_assert(std::is_nothrow_move_assignable<Allocator>::value,
         "Allocator must be noexcept assignable.");
     if(this == &other)
         return *this;
@@ -1095,7 +1095,7 @@ template<class Allocator>
 void
 basic_fields<Allocator>::
 set_content_length_impl(
-    boost::optional<std::uint64_t> const& value)
+    std::optional<std::uint64_t> const& value)
 {
     if(! value)
         erase(field::content_length);

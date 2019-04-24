@@ -12,9 +12,9 @@
 #include <boost/beast/core/file_base.hpp>
 #include <boost/beast/http/message.hpp>
 #include <boost/beast/http/type_traits.hpp>
-#include <boost/optional.hpp>
 #include <cstdint>
 #include <utility>
+#include <optional>
 
 namespace boost {
 namespace beast {
@@ -82,7 +82,7 @@ public:
 
     /** Returns the next buffer in the body.
 
-        @li If the return value is `boost::none` (unseated optional) and
+        @li If the return value is `std::nullopt` (unseated optional) and
             `ec` does not contain an error, this indicates the end of the
             body, no more buffers are present.
 
@@ -98,13 +98,13 @@ public:
 
         @param ec Set to the error, if any occurred.
     */
-    boost::optional<std::pair<const_buffers_type, bool>>
+    std::optional<std::pair<const_buffers_type, bool>>
     get(error_code& ec)
     {
         // The specification requires this to indicate "no error"
         ec = {};
 
-        return boost::none; // for exposition only
+        return std::nullopt; // for exposition only
     }
 };
 
@@ -139,7 +139,7 @@ struct BodyReader
     */
     void
     init(
-        boost::optional<std::uint64_t> const& content_length,
+        std::optional<std::uint64_t> const& content_length,
         error_code& ec)
     {
         boost::ignore_unused(content_length);
@@ -260,7 +260,7 @@ protected:
     /** Sets or clears the Content-Length field
     */
     void
-    set_content_length_impl(boost::optional<std::uint64_t>);
+    set_content_length_impl(std::optional<std::uint64_t>);
 
     /** Adjusts the Connection field
     */

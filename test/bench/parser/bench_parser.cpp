@@ -179,7 +179,7 @@ public:
 
         void
         on_body_init_impl(
-            boost::optional<std::uint64_t> const&,
+            std::optional<std::uint64_t> const&,
             error_code&) override
         {
         }
@@ -246,7 +246,7 @@ public:
 
         void
         on_body_init_impl(
-            boost::optional<std::uint64_t> const&,
+            std::optional<std::uint64_t> const&,
             error_code&) override
         {
         }

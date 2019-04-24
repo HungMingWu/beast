@@ -18,13 +18,13 @@
 #include <boost/beast/core/string.hpp>
 #include <boost/core/empty_value.hpp>
 #include <boost/assert.hpp>
-#include <boost/optional.hpp>
 #include <boost/throw_exception.hpp>
 #include <memory>
 #include <stdexcept>
 #include <string>
 #include <tuple>
 #include <utility>
+#include <optional>
 
 namespace boost {
 namespace beast {
@@ -765,7 +765,7 @@ public:
         @param value The value to set for Content-Length.
     */
     void
-    content_length(boost::optional<std::uint64_t> const& value);
+    content_length(std::optional<std::uint64_t> const& value);
 
     /** Returns `true` if the message semantics indicate keep-alive
 
@@ -828,14 +828,14 @@ public:
         This function invokes the <em>Body</em> algorithm to measure
         the number of octets in the serialized body container. If
         there is no body, this will return zero. Otherwise, if the
-        body exists but is not known ahead of time, `boost::none`
+        body exists but is not known ahead of time, `std::nullopt`
         is returned (usually indicating that a chunked Transfer-Encoding
         will be used).
 
         @note The value of the Content-Length field in the message
         is not inspected.
     */
-    boost::optional<std::uint64_t>
+    std::optional<std::uint64_t>
     payload_size() const;
 
     /** Prepare the message payload fields for the body.
@@ -945,16 +945,16 @@ private:
     bool
     need_eof(std::false_type) const;
 
-    boost::optional<std::uint64_t>
+    std::optional<std::uint64_t>
     payload_size(std::true_type) const
     {
         return Body::size(this->body());
     }
 
-    boost::optional<std::uint64_t>
+    std::optional<std::uint64_t>
     payload_size(std::false_type) const
     {
-        return boost::none;
+        return std::nullopt;
     }
 
     void

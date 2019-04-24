@@ -36,7 +36,7 @@ public:
             void
             init(error_code& ec);
 
-            boost::optional<std::pair<const_buffers_type, bool>>
+            std::optional<std::pair<const_buffers_type, bool>>
             get(error_code&);
         };
     };
@@ -56,7 +56,7 @@ public:
             void
             init(error_code& ec);
 
-            boost::optional<std::pair<const_buffers_type, bool>>
+            std::optional<std::pair<const_buffers_type, bool>>
             get(error_code&);
         };
     };

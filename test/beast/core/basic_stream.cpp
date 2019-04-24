@@ -26,7 +26,7 @@
 #include <boost/asio/spawn.hpp>
 #include <boost/asio/strand.hpp>
 #include <boost/asio/write.hpp>
-#include <boost/optional.hpp>
+#include <optional>
 #include <array>
 #include <thread>
 
@@ -451,7 +451,7 @@ public:
 
     class handler
     {
-        boost::optional<error_code> ec_;
+        std::optional<error_code> ec_;
         std::size_t n_;
 
     public:
@@ -733,7 +733,7 @@ public:
         class connect_handler
         {
             bool pass_ = false;
-            boost::optional<error_code> expected_ = {};
+            std::optional<error_code> expected_ = {};
 
         public:
             ~connect_handler()
@@ -1100,7 +1100,7 @@ public:
         class handler
         {
             bool pass_ = false;
-            boost::optional<error_code> expected_ = {};
+            std::optional<error_code> expected_ = {};
 
         public:
             ~handler()

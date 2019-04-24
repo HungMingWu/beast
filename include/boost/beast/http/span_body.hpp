@@ -15,7 +15,7 @@
 #include <boost/beast/core/span.hpp>
 #include <boost/beast/http/error.hpp>
 #include <boost/beast/http/message.hpp>
-#include <boost/optional.hpp>
+#include <optional>
 
 namespace boost {
 namespace beast {
@@ -80,7 +80,7 @@ public:
         }
 
         void
-        init(boost::optional<
+        init(std::optional<
             std::uint64_t> const& length, error_code& ec)
         {
             if(length && *length > body_.size())
@@ -147,7 +147,7 @@ public:
             ec = {};
         }
 
-        boost::optional<std::pair<const_buffers_type, bool>>
+        std::optional<std::pair<const_buffers_type, bool>>
         get(error_code& ec)
         {
             ec = {};

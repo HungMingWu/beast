@@ -76,21 +76,6 @@ class bind_wrapper
                 std::forward<Vals>(vals));
     }
 
-    template<class Arg, class Vals>
-    static
-    typename std::enable_if<
-        boost::is_placeholder<typename
-            std::decay<Arg>::type>::value != 0,
-        tuple_element<boost::is_placeholder<
-            typename std::decay<Arg>::type>::value - 1,
-        Vals>>::type&&
-    extract(Arg&&, Vals&& vals)
-    {
-        return detail::get<boost::is_placeholder<
-            typename std::decay<Arg>::type>::value - 1>(
-                std::forward<Vals>(vals));
-    }
-
     template<class ArgsTuple, std::size_t... S>
     static
     void

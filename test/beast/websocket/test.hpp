@@ -23,7 +23,7 @@
 #include <boost/asio/executor_work_guard.hpp>
 #include <boost/asio/io_context.hpp>
 #include <boost/asio/spawn.hpp>
-#include <boost/optional.hpp>
+#include <optional>
 #include <array>
 #include <cstdlib>
 #include <memory>

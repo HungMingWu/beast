@@ -15,9 +15,9 @@
 #include <boost/beast/http/error.hpp>
 #include <boost/beast/http/message.hpp>
 #include <boost/beast/http/type_traits.hpp>
-#include <boost/optional.hpp>
 #include <type_traits>
 #include <utility>
+#include <optional>
 
 namespace boost {
 namespace beast {
@@ -112,7 +112,7 @@ struct buffer_body
         }
 
         void
-        init(boost::optional<std::uint64_t> const&, error_code& ec)
+        init(std::optional<std::uint64_t> const&, error_code& ec)
         {
             ec = {};
         }
@@ -177,7 +177,7 @@ struct buffer_body
             ec = {};
         }
 
-        boost::optional<
+        std::optional<
             std::pair<const_buffers_type, bool>>
         get(error_code& ec)
         {
@@ -192,7 +192,7 @@ struct buffer_body
                 {
                     ec = {};
                 }
-                return boost::none;
+                return std::nullopt;
             }
             if(body_.data)
             {
@@ -205,7 +205,7 @@ struct buffer_body
                 ec = error::need_buffer;
             else
                 ec = {};
-            return boost::none;
+            return std::nullopt;
         }
     };
 #endif

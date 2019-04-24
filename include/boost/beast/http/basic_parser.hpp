@@ -17,12 +17,12 @@
 #include <boost/beast/http/verb.hpp>
 #include <boost/beast/http/detail/basic_parser.hpp>
 #include <boost/asio/buffer.hpp>
-#include <boost/optional.hpp>
 #include <boost/assert.hpp>
 #include <limits>
 #include <memory>
 #include <type_traits>
 #include <utility>
+#include <optional>
 
 namespace boost {
 namespace beast {
@@ -229,7 +229,7 @@ public:
         @note The return value is undefined unless
         @ref is_header_done would return `true`.
     */
-    boost::optional<std::uint64_t>
+    std::optional<std::uint64_t>
     content_length() const;
 
     /** Returns the remaining content length if known
@@ -241,7 +241,7 @@ public:
         @note The return value is undefined unless
               @ref is_header_done would return `true`.
     */
-    boost::optional<std::uint64_t>
+    std::optional<std::uint64_t>
     content_length_remaining() const;
 
     /** Returns `true` if the message semantics require an end of file.
@@ -529,7 +529,7 @@ protected:
 
         @param content_length A value representing the content length in
         bytes if the length is known (this can include a zero length).
-        Otherwise, the value will be `boost::none`.
+        Otherwise, the value will be `std::nullopt`.
 
         @param ec An output parameter which the function may set to indicate
         an error. The error will be clear before this function is invoked.
@@ -537,7 +537,7 @@ protected:
     virtual
     void
     on_body_init_impl(
-        boost::optional<std::uint64_t> const& content_length,
+        std::optional<std::uint64_t> const& content_length,
         error_code& ec) = 0;
 
     /** Called each time additional data is received representing the content body.

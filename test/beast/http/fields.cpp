@@ -850,7 +850,7 @@ public:
         res.content_length(100);
         BEAST_EXPECT(res[field::content_length] == "100");
         
-        res.content_length(boost::none);
+        res.content_length(std::nullopt);
         BEAST_EXPECT(res.count(field::content_length) == 0);
 
         res.set(field::transfer_encoding, "chunked");
@@ -864,7 +864,7 @@ public:
         BEAST_EXPECT(res.count(field::transfer_encoding) == 0);
         
         res.set(field::transfer_encoding, "chunked");
-        res.content_length(boost::none);
+        res.content_length(std::nullopt);
         BEAST_EXPECT(res.count(field::content_length) == 0);
         BEAST_EXPECT(res.count(field::transfer_encoding) == 0);
 
@@ -881,7 +881,7 @@ public:
             BEAST_EXPECT(res[field::transfer_encoding] == s);
         
             res.set(field::transfer_encoding, s);
-            res.content_length(boost::none);
+            res.content_length(std::nullopt);
             BEAST_EXPECT(res.count(field::content_length) == 0);
             BEAST_EXPECT(res[field::transfer_encoding] == s);
 
@@ -896,7 +896,7 @@ public:
             BEAST_EXPECT(res[field::transfer_encoding] == s);
         
             res.set(field::transfer_encoding, s + ", chunked");
-            res.content_length(boost::none);
+            res.content_length(std::nullopt);
             BEAST_EXPECT(res.count(field::content_length) == 0);
             BEAST_EXPECT(res[field::transfer_encoding] == s);
 
@@ -911,7 +911,7 @@ public:
             BEAST_EXPECT(res[field::transfer_encoding] == "chunked, " + s);
         
             res.set(field::transfer_encoding, "chunked, " + s);
-            res.content_length(boost::none);
+            res.content_length(std::nullopt);
             BEAST_EXPECT(res.count(field::content_length) == 0);
             BEAST_EXPECT(res[field::transfer_encoding] == "chunked, " + s);
         };

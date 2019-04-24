@@ -305,7 +305,7 @@ public:
         }
 
         {
-            using namespace boost::placeholders;
+            using namespace std::placeholders;
 
             // 0-ary
             bind_handler(test_cb{})();

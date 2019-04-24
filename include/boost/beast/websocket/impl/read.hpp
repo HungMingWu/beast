@@ -29,11 +29,11 @@
 #include <boost/asio/post.hpp>
 #include <boost/assert.hpp>
 #include <boost/config.hpp>
-#include <boost/optional.hpp>
 #include <boost/throw_exception.hpp>
 #include <algorithm>
 #include <limits>
 #include <memory>
+#include <optional>
 
 namespace boost {
 namespace beast {
@@ -664,7 +664,7 @@ public:
         auto& impl = *sp;
         using mutable_buffers_type = typename
             DynamicBuffer::mutable_buffers_type;
-        boost::optional<mutable_buffers_type> mb;
+        std::optional<mutable_buffers_type> mb;
         BOOST_ASIO_CORO_REENTER(*this)
         {
             do

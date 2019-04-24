@@ -41,7 +41,7 @@ struct span_body_test
             BEAST_EXPECTS(! ec, ec.message());
             auto const buf = r.get(ec);
             BEAST_EXPECTS(! ec, ec.message());
-            if(! BEAST_EXPECT(buf != boost::none))
+            if(! BEAST_EXPECT(buf != std::nullopt))
                 return;
             BEAST_EXPECT(buffer_bytes(buf->first) == 3);
             BEAST_EXPECT(! buf->second);
@@ -53,7 +53,7 @@ struct span_body_test
             req.body() = span<char>{buf, sizeof(buf)};
             B::reader w{req, req.body()};
             error_code ec;
-            w.init(boost::none, ec);
+            w.init(std::nullopt, ec);
             BEAST_EXPECTS(! ec, ec.message());
             w.put(net::const_buffer{
                 "123", 3}, ec);

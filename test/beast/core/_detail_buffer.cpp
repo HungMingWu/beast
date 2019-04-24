@@ -41,7 +41,7 @@ public:
         auto const result =
             dynamic_buffer_prepare(b, 20, ec,
             net::error::eof);
-        BEAST_EXPECT(result == boost::none);
+        BEAST_EXPECT(result == std::nullopt);
         BEAST_EXPECTS(
             ec == net::error::eof, ec.message());
     #else
@@ -62,7 +62,7 @@ public:
         auto const result =
             detail::dynamic_buffer_prepare_noexcept(b, 20, ec,
             net::error::eof);
-        BEAST_EXPECT(result == boost::none);
+        BEAST_EXPECT(result == std::nullopt);
         BEAST_EXPECTS(
             ec == net::error::eof, ec.message());
     }
